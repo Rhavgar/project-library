@@ -9,12 +9,43 @@ public class Alert implements Serializable
 {
     private static final long serialVersionUID = 1L;
     
+    private Long alertId;
+    private Long idBook;
+    private Long idMember;
     private Date issueDate;
-    private long idBook;
-    private long idMember;
     private Date loanTime;
     private Date returnDate;
 
+    public Long getAlertID() 
+    {
+        return alertId;
+    }
+
+    public void setAlertID(Long alertID) 
+    {
+        this.alertId = alertID;
+    }
+
+    public Long getIdBook() 
+    {
+        return idBook;
+    }
+
+    public void setIdBook(Long idBook) 
+    {
+        this.idBook = idBook;
+    }
+
+    public Long getIdMember() 
+    {
+        return idMember;
+    }
+
+    public void setIdMember(Long idMember) 
+    {
+        this.idMember = idMember;
+    }
+    
     public Date getIssueDate() 
     {
         return issueDate;
@@ -23,26 +54,6 @@ public class Alert implements Serializable
     public void setIssueDate(Date issueDate) 
     {
         this.issueDate = issueDate;
-    }
-
-    public long getIdBook() 
-    {
-        return idBook;
-    }
-
-    public void setIdBook(long idBook) 
-    {
-        this.idBook = idBook;
-    }
-
-    public long getIdMember() 
-    {
-        return idMember;
-    }
-
-    public void setIdMember(long idMember) 
-    {
-        this.idMember = idMember;
     }
 
     public Date getLoanTime() 
@@ -66,12 +77,11 @@ public class Alert implements Serializable
     }
 
     @Override
-    public int hashCode() 
-    {
-        int hash = 3;
-        hash = 31 * hash + Objects.hashCode(this.issueDate);
-        hash = 31 * hash + (int) (this.idBook ^ (this.idBook >>> 32));
-        hash = 31 * hash + (int) (this.idMember ^ (this.idMember >>> 32));
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + Objects.hashCode(this.alertId);
+        hash = 83 * hash + Objects.hashCode(this.idBook);
+        hash = 83 * hash + Objects.hashCode(this.idMember);
         return hash;
     }
 
@@ -91,20 +101,20 @@ public class Alert implements Serializable
             return false;
         }
         final Alert other = (Alert) obj;
-        if (this.idBook != other.idBook) 
+        if (!Objects.equals(this.alertId, other.alertId)) 
         {
             return false;
         }
-        if (this.idMember != other.idMember) 
+        if (!Objects.equals(this.idBook, other.idBook)) 
         {
             return false;
         }
-        if (!Objects.equals(this.issueDate, other.issueDate)) 
+        if (!Objects.equals(this.idMember, other.idMember)) 
         {
             return false;
         }
         return true;
     }
-    
-    
+
+       
 }
