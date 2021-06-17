@@ -1,18 +1,22 @@
 package br.edu.iff.projectLibrary.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 
+@Entity
 public class Librarian extends Person
 {
-    private String password;
+    @Column(nullable = false, length = 5, updatable = true)
+    private String shift;
 
-    public String getPassword() 
+    public String getShift() 
     {
-        return password;
+        return shift;
     }
 
-    public void setPassword(String password) 
+    public void setShift(String shift) 
     {
-        this.password = password;
+        this.shift = shift;
     }
     
 }

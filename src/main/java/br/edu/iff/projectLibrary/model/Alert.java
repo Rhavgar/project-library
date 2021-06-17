@@ -1,87 +1,100 @@
 package br.edu.iff.projectLibrary.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Alert implements Serializable
 {
     private static final long serialVersionUID = 1L;
     
-    private Long alertId;
-    private Long idBook;
-    private Long idMember;
-    private Date issueDate;
-    private Date loanTime;
-    private Date returnDate;
-
-    public Long getAlertID() 
-    {
-        return alertId;
-    }
-
-    public void setAlertID(Long alertID) 
-    {
-        this.alertId = alertID;
-    }
-
-    public Long getIdBook() 
-    {
-        return idBook;
-    }
-
-    public void setIdBook(Long idBook) 
-    {
-        this.idBook = idBook;
-    }
-
-    public Long getIdMember() 
-    {
-        return idMember;
-    }
-
-    public void setIdMember(Long idMember) 
-    {
-        this.idMember = idMember;
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long alertid;
+    @Column(nullable = false, updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar issueDate;
+    @Column(nullable = false, updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar returnDate;
     
-    public Date getIssueDate() 
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Member member;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Book book;
+
+    public Long getAlertid() 
+    {
+        return alertid;
+    }
+
+    public void setAlertid(Long alertid) 
+    {
+        this.alertid = alertid;
+    }
+
+    public Calendar getIssueDate() 
     {
         return issueDate;
     }
 
-    public void setIssueDate(Date issueDate) 
+    public void setIssueDate(Calendar issueDate) 
     {
         this.issueDate = issueDate;
     }
 
-    public Date getLoanTime() 
-    {
-        return loanTime;
-    }
-
-    public void setLoanTime(Date loanTime) 
-    {
-        this.loanTime = loanTime;
-    }
-
-    public Date getReturnDate() 
+    public Calendar getReturnDate() 
     {
         return returnDate;
     }
 
-    public void setReturnDate(Date returnDate) 
+    public void setReturnDate(Calendar returnDate) 
     {
         this.returnDate = returnDate;
     }
 
+    public Member getMember() 
+    {
+        return member;
+    }
+
+    public void setMember(Member member) 
+    {
+        this.member = member;
+    }
+
+    public Book getBook() 
+    {
+        return book;
+    }
+
+    public void setBook(Book book) 
+    {
+        this.book = book;
+    }
+    
     @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 83 * hash + Objects.hashCode(this.alertId);
-        hash = 83 * hash + Objects.hashCode(this.idBook);
-        hash = 83 * hash + Objects.hashCode(this.idMember);
+    public int hashCode() 
+    {
+        int hash = 3;
+        hash = 41 * hash + Objects.hashCode(this.alertid);
         return hash;
     }
 
@@ -101,20 +114,11 @@ public class Alert implements Serializable
             return false;
         }
         final Alert other = (Alert) obj;
-        if (!Objects.equals(this.alertId, other.alertId)) 
-        {
-            return false;
-        }
-        if (!Objects.equals(this.idBook, other.idBook)) 
-        {
-            return false;
-        }
-        if (!Objects.equals(this.idMember, other.idMember)) 
+        if (!Objects.equals(this.alertid, other.alertid)) 
         {
             return false;
         }
         return true;
     }
-
-       
+    
 }
