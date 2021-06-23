@@ -11,6 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -21,14 +24,25 @@ public class Book implements Serializable
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bookId;
+    
     @Column(nullable = false, length = 30, updatable = false)
+    @NotBlank(message = "Nome do livro é obrigatório.")
+    @Length(max = 30, message = "Nome do livro deve ter no máximo 30 caracteres.")
     private String bookName;
+    
     @Column(nullable = false, length = 30, updatable = false)
+    @NotBlank(message = "Autor do livro é obrigatório.")
+    @Length(max = 30, message = "Autor do livro deve ter no máximo 30 caracteres.")
     private String bookAuthor;
+    
     @Column(nullable = false, updatable = false)
     @Enumerated(EnumType.STRING)
+    @NotBlank(message = "Idioma é obrigatório.")
     private Language lang;
+    
     @Column(nullable = false, updatable = true)
+    @NotBlank(message = "Quantidade de exemplares é obrigatório.")
+    @Digits(integer = 4, fraction = 0, message = "Quantidade de exemplares deve ser inteiro e ter até 4 digitos.")
     private int bookAmount;
 
     public Long getBookId() 

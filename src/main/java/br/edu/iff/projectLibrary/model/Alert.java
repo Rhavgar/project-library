@@ -15,6 +15,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -25,19 +29,31 @@ public class Alert implements Serializable
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long alertid;
+    
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull(message = "Data de Emissão é obrigatória.")
+    @FutureOrPresent(message = "Data de Emissão deve ser atual ou no futuro.")
+    @DateTimeFormat(pattern = "yyyy.MM.dd, HH:mm:ss z")
     private Calendar issueDate;
+    
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull(message = "Data de Retorno é obrigatória.")
+    @Future(message = "Data de Retorno deve ser no futuro.")
+    @DateTimeFormat(pattern = "yyyy.MM.dd, HH:mm:ss z")
     private Calendar returnDate;
+    
     
     @JsonManagedReference
     @ManyToOne
     @JoinColumn(nullable = false)
+    @NotNull(message = "Membro é obrigatório.")
     private Member member;
+    
     @ManyToOne
     @JoinColumn(nullable = false)
+    @NotNull(message = "Livro é obrigatório.")
     private Book book;
 
     public Long getAlertid() 

@@ -11,15 +11,26 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Past;
+import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Member extends Person
 {
     @Column(nullable = false, length = 50, updatable = true)
+    @NotBlank(message = "Endereço é obrigatório.")
+    @Length(max = 50, message = "Endereço deve ter no máximo 50 caracteres.")
     private String address;
+    
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.DATE)
+    @NotBlank(message = "Data de Nascimento é obrigatório.")
+    @Past(message = "Data de Nascimento deve ser no passado.")
+    @DateTimeFormat(pattern = "mm-dd-yyyy")
     private Calendar birthday;
+    
     
     @JsonBackReference
     @OneToMany(mappedBy = "member")

@@ -1,5 +1,6 @@
 package br.edu.iff.projectLibrary.model;
 
+import br.edu.iff.projectLibrary.annotation.EmailValidation;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -9,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -19,13 +23,25 @@ public abstract class Person implements Serializable
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     @Column(nullable = false, length = 30, updatable = true)
+    @NotBlank(message = "Nome é obrigatório.")
+    @Length(max = 30, message = "Nome deve ter no máximo 30 caracteres.")
     private String name;
+    
     @Column(nullable = false, length = 30, unique = true, updatable = true)
+    @NotBlank(message = "Email é obrigatório.")
+    @EmailValidation
     private String email;
+    
     @Column(nullable = false, length = 14, unique = true, updatable = false)
+    @NotBlank(message = "CPF é obrigatório.")
+    @CPF(message = "CPF inválido.")
     private String cpf;
+    
     @Column(nullable = false, length = 16, updatable = true)
+    @NotBlank(message = "Senha é obrigatória.")
+    @Length(max = 16, min = 8, message = "Senha deve ter no mínimo 8 caracteres e no máximo 16 caracteres.")
     private String password;
 
     public Long getId() 
