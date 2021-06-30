@@ -57,11 +57,13 @@ public class LibMember extends Person
         this.birthday = birthday;
     }
 
-    public List<Alert> getAlerts() {
+    public List<Alert> getAlerts()
+    {
         return alerts;
     }
 
-    public void setAlerts(List<Alert> alerts) {
+    public void setAlerts(List<Alert> alerts)
+    {
         this.alerts = alerts;
     }
 
