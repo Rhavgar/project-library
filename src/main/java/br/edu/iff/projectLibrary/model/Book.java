@@ -9,8 +9,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
@@ -34,13 +35,12 @@ public class Book implements Serializable
     
     @Column(nullable = false, updatable = false)
     @Enumerated(EnumType.STRING)
-    @NotBlank(message = "Idioma é obrigatório.")
+    @NotNull(message = "Idioma é obrigatório.")
     @Length(max = 10, message = "Idioma deve ter no máximo 10 caracteres.")
     private Language lang;
     
     @Column(nullable = false, updatable = true)
-    @NotBlank(message = "Quantidade de exemplares é obrigatório.")
-    @Digits(integer = 4, fraction = 0, message = "Quantidade de exemplares deve ser inteiro e ter até 4 digitos.")
+    @PositiveOrZero(message = "Quantidade de exemplares deve ser zero ou maior.")
     private int bookAmount;
 
     public Long getId() 
