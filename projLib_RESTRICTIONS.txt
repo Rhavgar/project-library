@@ -15,14 +15,14 @@ address : string == not null, max 50, whitespace, editable
 birthday : calendar == not null, date, non editable
 
 Book
-bookId : long == not null, unique, auto-increment, non editable
+id : long == not null, unique, auto-increment, non editable
 bookName : string == not null, max 30, whitespace, non editable
 bookAuthor : string == not null, max 30, whitespace, non editable
 lang : Language == not null, enum (Language), non editable
 bookAmount : 0..*, editable, simultaneous ALERTS can`t be higher than bookAmount
 
 Alert
-alertId : long == not null, unique, auto-increment, non editable
+id : long == not null, unique, auto-increment, non editable
 issueDate : calendar == not null, timestamp, non editable
 returnDate : calendar == not null, timestamp, non editable
 
