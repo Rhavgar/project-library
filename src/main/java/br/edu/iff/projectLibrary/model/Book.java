@@ -35,6 +35,7 @@ public class Book implements Serializable
     @Column(nullable = false, updatable = false)
     @Enumerated(EnumType.STRING)
     @NotBlank(message = "Idioma é obrigatório.")
+    @Length(max = 10, message = "Idioma deve ter no máximo 10 caracteres.")
     private Language lang;
     
     @Column(nullable = false, updatable = true)
