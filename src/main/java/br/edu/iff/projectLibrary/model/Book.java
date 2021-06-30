@@ -23,7 +23,7 @@ public class Book implements Serializable
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long bookId;
+    private Long id;
     
     @Column(nullable = false, length = 30, updatable = false)
     @NotBlank(message = "Nome do livro é obrigatório.")
@@ -45,14 +45,14 @@ public class Book implements Serializable
     @Digits(integer = 4, fraction = 0, message = "Quantidade de exemplares deve ser inteiro e ter até 4 digitos.")
     private int bookAmount;
 
-    public Long getBookId() 
+    public Long getId() 
     {
-        return bookId;
+        return id;
     }
 
-    public void setBookId(Long bookId) 
+    public void seId(Long id) 
     {
-        this.bookId = bookId;
+        this.id = id;
     }
 
     public String getBookName() 
@@ -99,7 +99,7 @@ public class Book implements Serializable
     public int hashCode() 
     {
         int hash = 5;
-        hash = 37 * hash + Objects.hashCode(this.bookId);
+        hash = 37 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -119,7 +119,7 @@ public class Book implements Serializable
             return false;
         }
         final Book other = (Book) obj;
-        if (!Objects.equals(this.bookId, other.bookId)) 
+        if (!Objects.equals(this.id, other.id)) 
         {
             return false;
         }

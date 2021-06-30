@@ -28,7 +28,7 @@ public class Alert implements Serializable
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long alertid;
+    private Long id;
     
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -56,14 +56,14 @@ public class Alert implements Serializable
     @NotNull(message = "Livro é obrigatório.")
     private Book book;
 
-    public Long getAlertid() 
+    public Long getId() 
     {
-        return alertid;
+        return id;
     }
 
-    public void setAlertid(Long alertid) 
+    public void setId(Long id) 
     {
-        this.alertid = alertid;
+        this.id = id;
     }
 
     public Calendar getIssueDate() 
@@ -110,7 +110,7 @@ public class Alert implements Serializable
     public int hashCode() 
     {
         int hash = 3;
-        hash = 41 * hash + Objects.hashCode(this.alertid);
+        hash = 41 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -130,7 +130,7 @@ public class Alert implements Serializable
             return false;
         }
         final Alert other = (Alert) obj;
-        if (!Objects.equals(this.alertid, other.alertid)) 
+        if (!Objects.equals(this.id, other.id)) 
         {
             return false;
         }
