@@ -9,14 +9,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Book implements Serializable
 {
     private static final long serialVersionUID = 1L;
