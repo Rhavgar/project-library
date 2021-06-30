@@ -49,7 +49,7 @@ public class Alert implements Serializable
     @ManyToOne
     @JoinColumn(nullable = false)
     @NotNull(message = "Membro é obrigatório.")
-    private Member member;
+    private LibMember libMember;
     
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -86,14 +86,14 @@ public class Alert implements Serializable
         this.returnDate = returnDate;
     }
 
-    public Member getMember() 
+    public LibMember getLibMember() 
     {
-        return member;
+        return libMember;
     }
 
-    public void setMember(Member member) 
+    public void setLibMember(LibMember libMember) 
     {
-        this.member = member;
+        this.libMember = libMember;
     }
 
     public Book getBook() 

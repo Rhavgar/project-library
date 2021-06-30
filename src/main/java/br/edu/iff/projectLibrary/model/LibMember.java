@@ -17,7 +17,7 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-public class Member extends Person
+public class LibMember extends Person
 {
     @Column(nullable = false, length = 50, updatable = true)
     @NotBlank(message = "Endereço é obrigatório.")
@@ -33,7 +33,7 @@ public class Member extends Person
     
     
     @JsonBackReference
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "libMember")
     @ElementCollection(fetch = FetchType.EAGER)
     private List<Alert> alerts = new ArrayList<>();
     

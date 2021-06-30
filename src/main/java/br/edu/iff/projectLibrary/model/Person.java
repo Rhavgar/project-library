@@ -27,7 +27,7 @@ public abstract class Person implements Serializable
     @Column(nullable = false, length = 30, updatable = true)
     @NotBlank(message = "Nome é obrigatório.")
     @Length(max = 30, message = "Nome deve ter no máximo 30 caracteres.")
-    private String name;
+    private String personName;
     
     @Column(nullable = false, length = 30, unique = true, updatable = true)
     @NotBlank(message = "Email é obrigatório.")
@@ -54,14 +54,14 @@ public abstract class Person implements Serializable
         this.id = id;
     }
 
-    public String getName() 
+    public String getPersonName() 
     {
-        return name;
+        return personName;
     }
 
-    public void setName(String name) 
+    public void setPersonName(String personName) 
     {
-        this.name = name;
+        this.personName = personName;
     }
 
     public String getEmail() 

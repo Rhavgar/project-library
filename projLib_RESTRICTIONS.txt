@@ -2,7 +2,7 @@ Project Library Restrictions
 
 <abstract > Person
 id : long == not null, unique, auto-increment, non editable
-name : string == not null, max 30, whitespace, editable
+personName : string == not null, max 30, whitespace, editable
 email : string == not null, max 30, non whitespace, unique, editable
 cpf : string == not null, max 14, /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, unique, non editable
 password : string == not null, min 8, max 16, non whitespace, editable
@@ -10,7 +10,7 @@ password : string == not null, min 8, max 16, non whitespace, editable
 Librarian
 shift : string == not null, max 5, non whitespace, editable
 
-Member,,, can`t have more than 3 simultanous ALERTS
+LibMember,,, can`t have more than 3 simultanous ALERTS
 address : string == not null, max 50, whitespace, editable
 birthday : calendar == not null, date, non editable
 
