@@ -8,9 +8,9 @@ import org.hibernate.validator.constraints.Length;
 @Entity
 public class Librarian extends Person
 {
-    @Column(nullable = false, length = 5, updatable = true)
+    @Column(nullable = false, length = 7, updatable = true)
     @NotBlank(message = "Turno é obrigatório.")
-    @Length(message = "Turno deve ter no máximo 5 caracteres.")
+    @Length(message = "Turno deve ter no máximo 7 caracteres.")
     private String shift;
 
     public String getShift() 

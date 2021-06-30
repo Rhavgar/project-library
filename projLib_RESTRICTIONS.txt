@@ -8,7 +8,7 @@ cpf : string == not null, max 14, /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, unique, non ed
 password : string == not null, min 8, max 16, non whitespace, editable
 
 Librarian
-shift : string == not null, max 5, non whitespace, editable
+shift : string == not null, max 7, non whitespace, editable
 
 LibMember,,, can`t have more than 3 simultanous ALERTS
 address : string == not null, max 50, whitespace, editable
