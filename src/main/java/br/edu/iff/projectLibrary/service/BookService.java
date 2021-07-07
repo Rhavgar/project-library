@@ -48,4 +48,39 @@ public class BookService
         }
     }
     
+    public Book update(Book b)
+    {
+        Book obj = findById(b.getId());
+        
+        try
+        {
+        b.setBookName(b.getBookName());
+        b.setBookAuthor(b.getBookAuthor());
+        b.setLang(b.getLang());
+        return repo.save(b);
+        }
+        catch(Exception e)
+        {
+            throw new RuntimeException("Falha ao atualizar o livro.");
+        }
+    }
+    
+    public void delete(Long id)
+    {
+        int x = repo.countAlertByBookId(id);
+        
+        if(x >= 0)
+        {
+            throw new RuntimeException("Há exemplares emprestados.");
+        }
+        try
+        {
+            repo.deleteById(id);
+        }
+        catch(Exception e)
+        {
+            throw new RuntimeException("Falha ao deletar o livro.");
+        }
+    }
+    
 }

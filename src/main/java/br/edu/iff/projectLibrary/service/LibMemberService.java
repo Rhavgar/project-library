@@ -69,6 +69,24 @@ public class LibMemberService
         }
     }
     
+    public void delete(Long id)
+    {
+        LibMember obj = findById(id);
+        
+        if(obj.getAlerts().size() >= 0)
+        {
+            throw new RuntimeException("Há emprestimos pendentes.");
+        }
+        try
+        {
+            repo.delete(obj);
+        }
+        catch(Exception e)
+        {
+            throw new RuntimeException("Falha ao deletar o membro.");
+        }
+    }
+    
     private void verifyCpfOrEmail(String cpf, String email)
     {
         List<Person> result = repo.findByCpfOrEmail(cpf, email);

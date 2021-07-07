@@ -38,7 +38,7 @@ public class AlertController
         return ResponseEntity.ok(service.findById(id));
     }
     
-    /*@PostMapping
+    @PostMapping
     public ResponseEntity save(@RequestBody Alert alert)
     {
         alert.setId(null);
@@ -46,19 +46,19 @@ public class AlertController
         return ResponseEntity.status(HttpStatus.CREATED).body(alert);
     }
     
-    @PutMapping("/{id}")
+    /*@PutMapping("/{id}")
     public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Alert alert)
     {
         alert.setId(id);
         service.update(alert);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }
+    }*/
     
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable("id") Long id)
     {
         service.delete(id);
         return ResponseEntity.ok().build();
-    }*/
+    }
     
 }

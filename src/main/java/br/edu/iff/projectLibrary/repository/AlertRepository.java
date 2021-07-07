@@ -1,6 +1,8 @@
 package br.edu.iff.projectLibrary.repository;
 
 import br.edu.iff.projectLibrary.model.Alert;
+import br.edu.iff.projectLibrary.model.Book;
+import br.edu.iff.projectLibrary.model.LibMember;
 import java.util.Calendar;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
@@ -21,4 +23,10 @@ public interface AlertRepository extends JpaRepository<Alert, Long>
     
     @Query("SELECT DISTINCT(a) FROM Alert a WHERE (a.start BETWEEN :start AND :end) OR (a.end BETWEEN :start AND :end)")
     public List<Alert> findAlertBetweenDates(Calendar start, Calendar end);
+    
+    @Query("SELECT DISTINCT(a) FROM Alert a WHERE ((a.start BETWEEN :start AND :end) OR (a.end BETWEEN :start AND :end)) AND a.book = :book")
+    public List<Alert> findAlertBetweenDatesBookSpecific(Calendar start, Calendar end, Book book);
+    
+    @Query("SELECT DISTINCT(a) FROM Alert a WHERE ((a.start BETWEEN :start AND :end) OR (a.end BETWEEN :start AND :end)) AND a.libMember = :libMember")
+    public List<Alert> findAlertBetweenDatesLibMemberSpecific(Calendar start, Calendar end, LibMember libMember);
 }

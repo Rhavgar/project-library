@@ -1,11 +1,13 @@
 package br.edu.iff.projectLibrary.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
+@JsonIgnoreProperties(value = "password", allowGetters = false, allowSetters = true)
 public class Librarian extends Person
 {
     @Column(nullable = false, length = 7, updatable = true)

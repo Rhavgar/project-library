@@ -53,12 +53,12 @@ public class LibMemberController
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     
-    /*@DeleteMapping("/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable("id") Long id)
     {
         service.delete(id);
         return ResponseEntity.ok().build();
-    }*/
+    }
     
     @PutMapping("/{id}/alterPass")
     public ResponseEntity alterPass

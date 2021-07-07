@@ -49,9 +49,11 @@ public class AlertService
         return obj.get();
     }
     
-    /*public Alert save(Alert a)
+    public Alert save(Alert a)
     {
         verifyStartEndDate(a);
+        verifyBookAmount(a);
+        verifyLibMemberWithAlerts(a);
     
         try
         {
@@ -63,25 +65,43 @@ public class AlertService
         }
     }
     
-    public Alert update(Alert a)
-    {
-    }
+    /*public Alert update(Alert a)
+    {  
+    }*/
     
-    public void delete(Lond id)
+    public void delete(Long id)
     {
+        Alert obj = findById(id);
+        
+        try
+        {
+            repo.delete(obj);
+        }
+        catch(Exception e)
+        {
+            throw new RuntimeException("Falha ao excluir o alerta.");
+        }
     }
         
-    private void verifyBookWithAlerts(Alert a)
+    private void verifyBookAmount(Alert a)
     {
-        List<Alert> alerts = repo.findAlertBetweenDates(a.getIssueDate(), a.getReturnDate());
-        for(Alert alert : alerts)
+        List<Alert> alerts = repo.findAlertBetweenDatesBookSpecific(a.getIssueDate(), a.getReturnDate(), a.getBook());
+        
+        if(alerts.size() >= a.getBook().getBookAmount())
         {
-            if(a.getBook().contains(alert))
-            {
-                throw new RuntimeException("Livros emprestados para o período chegou ao limite.");
-            }
+            throw new RuntimeException("Livros emprestados para o período chegou ao limite.");
         }
-    }*/
+    }
+    
+    public void verifyLibMemberWithAlerts(Alert a)
+    {
+       List<Alert> alerts = repo.findAlertBetweenDatesLibMemberSpecific(a.getIssueDate(), a.getReturnDate(), a.getLibMember());
+        
+        if(alerts.size() >= 3)
+        {
+            throw new RuntimeException("Livros emprestados a este membro para o período chegou ao limite.");
+        }
+    }
     
     private void verifyStartEndDate(Alert a)
     {

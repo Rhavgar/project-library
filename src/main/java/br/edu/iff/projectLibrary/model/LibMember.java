@@ -1,6 +1,7 @@
 package br.edu.iff.projectLibrary.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -17,6 +18,7 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
+@JsonIgnoreProperties(value = "password", allowGetters = false, allowSetters = true)
 public class LibMember extends Person
 {
     @Column(nullable = false, length = 50, updatable = true)

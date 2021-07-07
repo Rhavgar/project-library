@@ -45,7 +45,7 @@ public class BookController
         return ResponseEntity.status(HttpStatus.CREATED).body(book);
     }
     
-    /*@PutMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity update(@PathVariable("id") Long id, @Valid @RequestBody Book book)
     {
         book.setId(id);
@@ -58,6 +58,6 @@ public class BookController
     {
         service.delete(id);
         return ResponseEntity.ok().build();
-    }*/
+    }
     
 }
