@@ -1,6 +1,6 @@
 package br.edu.iff.projectLibrary.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -32,7 +32,7 @@ public class LibMember extends Person
     private Calendar birthday;
     
     
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "libMember")
     @ElementCollection(fetch = FetchType.EAGER)
     private List<Alert> alerts = new ArrayList<>();

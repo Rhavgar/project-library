@@ -1,6 +1,5 @@
 package br.edu.iff.projectLibrary.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Objects;
@@ -42,7 +41,6 @@ public class Alert implements Serializable
     private Calendar returnDate;
     
     
-    @JsonManagedReference
     @ManyToOne
     @JoinColumn(nullable = false)
     @NotNull(message = "Membro é obrigatório.")
