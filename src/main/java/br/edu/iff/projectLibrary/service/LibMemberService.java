@@ -60,6 +60,7 @@ public class LibMemberService
         {
         lm.setCpf(obj.getCpf());
         lm.setBirthday(obj.getBirthday());
+        lm.setPassword(obj.getPassword());
         return repo.save(lm);
         }
         catch(Exception e)

@@ -59,6 +59,7 @@ public class LibrarianService
         try
         {
         l.setCpf(obj.getCpf());
+        l.setPassword(obj.getPassword());
         return repo.save(l);
         }
         catch(Exception e)
