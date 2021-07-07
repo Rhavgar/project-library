@@ -1,5 +1,6 @@
 package br.edu.iff.projectLibrary.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Objects;
@@ -31,6 +32,7 @@ public class Alert implements Serializable
     @NotNull(message = "Data de Emissão é obrigatória.")
     @FutureOrPresent(message = "Data de Emissão deve ser atual ou no futuro.")
     @DateTimeFormat(pattern = "yyyy.MM.dd, HH:mm:ss z")
+    @JsonFormat(pattern = "yyyy.MM.dd, HH:mm:ss z")
     private Calendar issueDate;
     
     @Column(nullable = false, updatable = false)
@@ -38,6 +40,7 @@ public class Alert implements Serializable
     @NotNull(message = "Data de Retorno é obrigatória.")
     @Future(message = "Data de Retorno deve ser no futuro.")
     @DateTimeFormat(pattern = "yyyy.MM.dd, HH:mm:ss z")
+    @JsonFormat(pattern = "yyyy.MM.dd, HH:mm:ss z")
     private Calendar returnDate;
     
     
