@@ -48,7 +48,7 @@ public class Book implements Serializable
         return id;
     }
 
-    public void seId(Long id) 
+    public void setId(Long id) 
     {
         this.id = id;
     }
