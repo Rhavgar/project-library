@@ -1,5 +1,6 @@
 package br.edu.iff.projectLibrary.service;
 
+import br.edu.iff.projectLibrary.exception.NotFoundException;
 import br.edu.iff.projectLibrary.model.Book;
 import br.edu.iff.projectLibrary.repository.BookRepository;
 import java.util.List;
@@ -31,7 +32,7 @@ public class BookService
         Optional<Book> result = repo.findById(id);
         if(result.isEmpty())
         {
-            throw new RuntimeException("Livro não encontrado.");
+            throw new NotFoundException("Livro não encontrado.");
         }
         return result.get();
     }

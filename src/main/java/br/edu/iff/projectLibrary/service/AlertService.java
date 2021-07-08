@@ -1,9 +1,11 @@
 package br.edu.iff.projectLibrary.service;
 
+import br.edu.iff.projectLibrary.exception.NotFoundException;
 import br.edu.iff.projectLibrary.model.Alert;
 import br.edu.iff.projectLibrary.repository.AlertRepository;
 import java.util.List;
 import java.util.Optional;
+import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -44,7 +46,7 @@ public class AlertService
         Optional<Alert> obj =  repo.findById(id);
         if(obj.isEmpty())
         {
-            throw new RuntimeException("Alerta não encontrado.");
+            throw new NotFoundException("Alerta não encontrado.");
         }
         return obj.get();
     }
@@ -61,6 +63,14 @@ public class AlertService
         }
         catch(Exception e)
         {
+            Throwable t = e;
+            while(t.getCause() != null)
+            {
+                if(t instanceof ConstraintViolationException)
+                {
+                  throw((ConstraintViolationException) t);
+                }
+            }
             throw new RuntimeException("Falha ao salvar o alerta.");
         }
     }

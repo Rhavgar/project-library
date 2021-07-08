@@ -1,10 +1,12 @@
 package br.edu.iff.projectLibrary.service;
 
+import br.edu.iff.projectLibrary.exception.NotFoundException;
 import br.edu.iff.projectLibrary.model.LibMember;
 import br.edu.iff.projectLibrary.model.Person;
 import br.edu.iff.projectLibrary.repository.LibMemberRepository;
 import java.util.List;
 import java.util.Optional;
+import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -32,7 +34,7 @@ public class LibMemberService
         Optional<LibMember> result = repo.findById(id);
         if(result.isEmpty())
         {
-            throw new RuntimeException("Membro não encontrado.");
+            throw new NotFoundException("Membro não encontrado.");
         }
         return result.get();
     }
@@ -65,6 +67,14 @@ public class LibMemberService
         }
         catch(Exception e)
         {
+            Throwable t = e;
+            while(t.getCause() != null)
+            {
+                if(t instanceof ConstraintViolationException)
+                {
+                  throw((ConstraintViolationException) t);
+                }
+            }
             throw new RuntimeException("Falha ao atualizar o membro.");
         }
     }
