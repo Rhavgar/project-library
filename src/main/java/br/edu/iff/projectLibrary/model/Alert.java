@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Future;
-import javax.validation.constraints.FutureOrPresent;
+//import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -30,7 +30,7 @@ public class Alert implements Serializable
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @NotNull(message = "Data de Emissão é obrigatória.")
-    @FutureOrPresent(message = "Data de Emissão deve ser atual ou no futuro.")
+    //@FutureOrPresent(message = "Data de Emissão deve ser atual ou no futuro.")
     @DateTimeFormat(pattern = "yyyy.MM.dd, HH:mm:ss z")
     @JsonFormat(pattern = "yyyy.MM.dd, HH:mm:ss z")
     private Calendar issueDate;
