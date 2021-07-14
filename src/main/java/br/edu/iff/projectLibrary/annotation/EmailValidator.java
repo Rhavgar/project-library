@@ -12,7 +12,7 @@ public class EmailValidator implements ConstraintValidator<EmailValidation, Stri
     {
         if(t==null) return false;
         if(t.contains(" ")) return false;
-        return t.matches(" [\\w\\S]+[@]+[\\w\\S]+[.]+[\\w\\S]+");
+        return t.matches("[\\w\\S]+[@]+[\\w\\S]+[.]+[\\w\\S]+");
     }
     
 }
