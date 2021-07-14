@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{frags :: imports-css(title='Alert System')}">
+        <title>...</title>
+    </head>
+    <body>
+        <div th:replace="~{frags :: menubar(page='')}"/>
+            
+        <div class="container" align="center">
+            <img th:src="@{~/images/grey_bell.png" style="opacity: 10%"/>
+        </div>
+        
+        <div th:replace="~{frags :: imports-js}"/>
+    </body>
+</html>
