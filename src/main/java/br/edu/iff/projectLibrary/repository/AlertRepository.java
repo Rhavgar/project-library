@@ -14,19 +14,19 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AlertRepository extends JpaRepository<Alert, Long>
 {
-    @Query("SELECT DISTINCT(a) FROM Alert a JOIN a.book b WHERE b.bookId = :bookId")
+    @Query("SELECT DISTINCT(a) FROM Alert a JOIN a.book b WHERE b.Id = :bookId")
     public List<Alert> findByAlertByBook(@Param("bookId") Long bookId);
     
     public List<Alert> findByLibMemberId(Long libMemberId, Pageable page);
     
     public List<Alert> findByLibMemberIdAndBookId(Long libMemberId, Long bookId, Pageable page);
     
-    @Query("SELECT DISTINCT(a) FROM Alert a WHERE (a.start BETWEEN :start AND :end) OR (a.end BETWEEN :start AND :end)")
-    public List<Alert> findAlertBetweenDates(Calendar start, Calendar end);
+    @Query("SELECT DISTINCT(a) FROM Alert a WHERE (a.issueDate BETWEEN :issueDate AND :returnDate) OR (a.returnDate BETWEEN :issueDate AND :returnDate)")
+    public List<Alert> findAlertBetweenDates(Calendar issueDate, Calendar returnDate);
     
-    @Query("SELECT DISTINCT(a) FROM Alert a WHERE ((a.start BETWEEN :start AND :end) OR (a.end BETWEEN :start AND :end)) AND a.book = :book")
-    public List<Alert> findAlertBetweenDatesBookSpecific(Calendar start, Calendar end, Book book);
+    @Query("SELECT DISTINCT(a) FROM Alert a WHERE ((a.issueDate BETWEEN :issueDate AND :returnDate) OR (a.returnDate BETWEEN :issueDate AND :returnDate)) AND a.book = :book")
+    public List<Alert> findAlertBetweenDatesBookSpecific(Calendar issueDate, Calendar returnDate, Book book);
     
-    @Query("SELECT DISTINCT(a) FROM Alert a WHERE ((a.start BETWEEN :start AND :end) OR (a.end BETWEEN :start AND :end)) AND a.libMember = :libMember")
-    public List<Alert> findAlertBetweenDatesLibMemberSpecific(Calendar start, Calendar end, LibMember libMember);
+    @Query("SELECT DISTINCT(a) FROM Alert a WHERE ((a.issueDate BETWEEN :issueDate AND :returnDate) OR (a.returnDate BETWEEN :issueDate AND :returnDate)) AND a.libMember = :libMember")
+    public List<Alert> findAlertBetweenDatesLibMemberSpecific(Calendar issueDate, Calendar returnDate, LibMember libMember);
 }
