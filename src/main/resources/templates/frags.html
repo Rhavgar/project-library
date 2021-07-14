@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:fragment="imports-css(title)">
+        <title th:text="${title}">Projeto Livraria</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link th:href="@{~/webjars/bootstrap/5.0.1/css/bootstrap.min.css}" rel="stylesheet"/>
+    </head>
+    <body>
+        <div th:fragment="menubar(page)">
+            <div class=""container">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <a class="navbar-brand" href="/">
+                        <img th:src="@{~/images/bell.png}" width="30" height="30" class="d-inline-block align-top"/>
+                        Alert System
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#textNavbar" aria-controls="textNavbar" aria-expanded="false" aria-label="Alterna Navegação">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="textNavbar">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item" th:classappend="${page == 'books' ? 'active' : ''}">
+                                <a class="nav-link" th:href="@{~/books}">Livros</a>                          
+                            </li>
+                            <li class="nav-item" th:classappend="${page == 'libmembers' ? 'active' : ''}">
+                                <a class="nav-link" th:href="@{~/libmembers}">Membros</a>                         
+                            </li>
+                            <li class="nav-item" th:classappend="${page == 'librarians' ? 'active' : ''}">
+                                <a class="nav-link" th:href="@{~/librarians}">Bibliotecários</a>                          
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        
+        <div th:fragment="imports-js">
+            <!--script th:src="@{~/webjars/jquery/3.6.0/jquery.min.js}"/-->
+            <script th:src="@{~/webjars/bootstrap/5.0.1/js/bootstrap.bundle.min.js}"/>
+        </div>
+        
+    </body>
+</html>
