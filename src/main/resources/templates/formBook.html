@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{frags :: imports-css(title='Livros')}">
+        <title>title</title>
+    </head>
+    <body>
+        <div th:replace="~{frags :: menubar(page='books')}"/>
+            
+        <div class="container" style="width: 60%; margin-top: 20px">
+            <div class="card-header">
+                <h4>
+                    Cadastro de Livros
+                    <a class="btn btn-primary float-right" th:href="@{~/books}" role="button">Voltar</a>
+                </h4>
+            </div>
+            
+            <div th:replace="~{frags :: msgs}"></div>
+            
+            <form th:object="${book}" th:action="@{~/books/book/{id}(id=${book.id})}" method="post" class="card-body">
+                <input type="hidden" th:field="*{id}"/>
+                
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                        <label for="bookName">Nome:</label>
+                        <input th:field="*{bookName}" type="text" class="form-control" placeholder="Nome" required="required" maxlength="30"/>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="bookAuthor">Autor:</label>
+                        <input th:field="*{bookAuthor}" type="text" class="form-control" placeholder="Autor" required="required" maxlength="30"/>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="bookAmount">Exemplares:</label>
+                        <input th:field="*{bookAmount}" type="text" class="form-control" placeholder="Autor" required="required"/>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <select class="form-control form-control-sm" th:field="*{lang}" required="required">
+                        <option th:each="*{lang}" th:value="*{lang}" th:text="*{lang}">option</option>
+                    </select>
+                </div>
+                
+                <div class="card-footer">
+                    <input type="submit" class="btn btn-success" value="Salvar"/>
+                </div>
+                
+            </form>
+        </div>
+        
+        <div th:replace="~{frags :: imports-js}"/>
+    </body>
+</html>
