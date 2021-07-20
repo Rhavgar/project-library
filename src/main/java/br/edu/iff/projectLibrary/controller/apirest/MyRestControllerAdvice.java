@@ -1,4 +1,4 @@
-package br.edu.iff.projectLibrary.controller;
+package br.edu.iff.projectLibrary.controller.apirest;
 
 import java.util.Calendar;
 import javax.servlet.http.HttpServletRequest;

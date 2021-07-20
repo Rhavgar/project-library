@@ -1,4 +1,4 @@
-package br.edu.iff.projectLibrary.controller;
+package br.edu.iff.projectLibrary.controller.apirest;
 
 import br.edu.iff.projectLibrary.model.LibMember;
 import br.edu.iff.projectLibrary.service.LibMemberService;

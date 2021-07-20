@@ -1,8 +1,7 @@
-package br.edu.iff.projectLibrary.controller;
+package br.edu.iff.projectLibrary.controller.apirest;
 
-import br.edu.iff.projectLibrary.model.Book;
-import br.edu.iff.projectLibrary.service.BookService;
-import javax.validation.Valid;
+import br.edu.iff.projectLibrary.model.Alert;
+import br.edu.iff.projectLibrary.service.AlertService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,41 +16,43 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/apirest/books")
-public class BookController
+@RequestMapping("/apirest/alerts")
+public class AlertController
 {
     @Autowired
-    private BookService service;
+    private AlertService service;
     
     @GetMapping
     public ResponseEntity getAll
         (@RequestParam(name = "page", defaultValue = "0", required = false) int page,
-         @RequestParam(name = "size", defaultValue = "10", required = false) int size)
+         @RequestParam(name = "page", defaultValue = "10", required = false) int size,
+         @RequestParam(name = "libMemberId", defaultValue = "0", required = false) Long libMemberId,
+         @RequestParam(name = "bookId", defaultValue = "0", required = false) Long bookId)
     {
-        return ResponseEntity.status(HttpStatus.OK).body(service.findAll(page, size));
+        return ResponseEntity.ok(service.findAll(page, size, libMemberId, bookId));
     }
     
-    @GetMapping(path = "/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity getOne(@PathVariable("id") Long id)
     {
         return ResponseEntity.ok(service.findById(id));
     }
     
     @PostMapping
-    public ResponseEntity save(@Valid @RequestBody Book book)
+    public ResponseEntity save(@RequestBody Alert alert)
     {
-        book.setId(null);
-        service.save(book);
-        return ResponseEntity.status(HttpStatus.CREATED).body(book);
+        alert.setId(null);
+        service.save(alert);
+        return ResponseEntity.status(HttpStatus.CREATED).body(alert);
     }
     
-    @PutMapping("/{id}")
-    public ResponseEntity update(@PathVariable("id") Long id, @Valid @RequestBody Book book)
+    /*@PutMapping("/{id}")
+    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Alert alert)
     {
-        book.setId(id);
-        service.update(book);
+        alert.setId(id);
+        service.update(alert);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }
+    }*/
     
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable("id") Long id)
