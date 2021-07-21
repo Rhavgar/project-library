@@ -59,7 +59,7 @@ public class BookViewController
         }
         catch(Exception e)
         {
-            model.addAttribute("errorMsg", new ObjectError("Book", e.getMessage()));
+            model.addAttribute("errorMsg", new ObjectError("book", e.getMessage()));
             return "formBook";
         }
     }
@@ -94,7 +94,7 @@ public class BookViewController
         }
         catch(Exception e)
         {
-            model.addAttribute("errorMsg", new ObjectError("Book", e.getMessage()));
+            model.addAttribute("errorMsg", new ObjectError("book", e.getMessage()));
             return "formBook";
         }
     }
