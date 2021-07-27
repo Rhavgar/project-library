@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{frags :: imports-css(title='Alertas')}">
+        <title>title</title>
+    </head>
+    <body>
+        <div th:replace="~{frags :: menubar(page='alerts')}"/>
+            
+        <div class="container" style="margin-top: 20px">
+            <div class="card-header">
+                <h4>
+                    Alertas Cadastrados
+                    <a class="btn btn-primary float-right" th:href="@{~/alerts/alert}" role="button">Novo Alerta</a>
+                </h4>
+            </div>
+            
+            <div class="card" th:each="alert : ${alerts}">
+                <div class="card-body">
+                    <div class="card-text" th:text="'Membro: ' + ${alert.libMember}"></div>
+                    <div class="card-text" th:text="'Livro: ' + ${alert.book}"></div>
+                    <div class="card-text" th:text="'Data de Emissão: ' + ${alert.issueDate.get(5)+'/'+(alert.issueDate.get(2)+1)+'/'+alert.issueDate.get(1)}"></div>
+                    <div class="card-text" th:text="'Data de Retorno: ' + ${alert.returnDate.get(5)+'/'+(alert.returnDate.get(2)+1)+'/'+alert.returnDate.get(1)}"></div>
+                </div>
+                
+                <div class="card-body">
+                    <a th:href="@{'~/alerts/'+${alert.id}+'/delete'}" class="btn btn-danger" onclick="return confirm('Deseja realmente excluir esse alerta?')">Excluir</a>
+                </div>
+            </div>
+        </div>
+        
+        <div th:replace="~{frags :: imports-js}"/>
+    </body>
+</html>

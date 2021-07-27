@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{frags :: imports-css(title='Alertas')}">
+        <title>title</title>
+    </head>
+    <body>
+        <div th:replace="~{frags :: menubar(page='alerts')}"/>
+            
+        <div class="container" style="width: 60%; margin-top: 20px">
+            <div class="card-header">
+                <h4>
+                    Cadastro de Alertas
+                    <a class="btn btn-primary float-right" th:href="@{~/alerts}" role="button">Voltar</a>
+                </h4>
+            </div>
+            
+            <div th:replace="~{frags :: msgs}"></div>
+            
+            <form th:object="${alert}" th:action="@{~/alerts/alert/{id}(id=${alert.id})}" method="post" class="card-body">
+                <input type="hidden" th:field="*{id}"/>
+                
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Membro:</label>
+                        <select class="form-control form-control-sm" th:field="*{libMember.id}" required="required">
+                            <option th:each="lm : ${libmembers}" th:value="${lm.id}" th:text="${lm.personName}">content</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Livro:</label>
+                        <select class="form-control form-control-sm" th:field="*{book.id}" required="required">
+                            <option th:each="b : ${books}" th:value="${b.id}" th:text="${b.personName}">content</option>
+                        </select>
+                    </div>
+                </div>
+                
+                 <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Data de Emissão:</label>
+                        <input type="date" th:field="*{issueDate}" required="required"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Data de Retorno:</label>
+                        <input type="date" th:field="*{returnDate}" required="required"/>
+                    </div>
+                </div>
+                
+                <div class="card-footer">
+                    <input type="submit" class="btn btn-success" value="Salvar"/>
+                </div>
+                
+            </form>
+        </div>
+        
+        <div th:replace="~{frags :: imports-js}"/>
+    </body>
+</html>
