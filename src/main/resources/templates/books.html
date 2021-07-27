@@ -22,7 +22,7 @@
                 <div class="card-body">
                     <div class="card-text" th:text="'Autor: ' + ${book.bookAuthor}"></div>
                     <div class="card-text" th:text="'Idioma: ' + ${book.lang}"></div>
-                    <div class="card-text" th:text="${'Quantidade de exemplares: ' + ${book.bookAmount}"></div>
+                    <div class="card-text" th:text="${'Quantidade de exemplares: ' + book.bookAmount}"></div>
                 </div>
                 
                 <div class="card-body">

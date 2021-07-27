@@ -33,7 +33,7 @@ public class BookViewController
     public String create(Model model)
     {
         model.addAttribute("book", new Book());
-        model.addAttribute("lang", Language.values());
+        model.addAttribute("languages", Language.values());
         return "formBook";
     }
     

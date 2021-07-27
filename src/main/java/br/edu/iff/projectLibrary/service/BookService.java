@@ -70,7 +70,7 @@ public class BookService
     {
         int x = repo.countAlertByBookId(id);
         
-        if(x >= 0)
+        if(x > 0)
         {
             throw new RuntimeException("Há exemplares emprestados.");
         }

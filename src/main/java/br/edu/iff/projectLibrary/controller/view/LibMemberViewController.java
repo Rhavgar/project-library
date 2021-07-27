@@ -78,7 +78,7 @@ public class LibMemberViewController
     }
     
     @PostMapping(path = "/libmember/{id}")
-    public String update(@Valid @ModelAttribute LibMember libmember, BindingResult result,@PathVariable("id") Long id, Model model)
+    public String update(@Valid @ModelAttribute LibMember libmember, BindingResult result, @PathVariable("id") Long id, Model model)
     {
         List<FieldError> list = new ArrayList<>();
         for(FieldError fe : result.getFieldErrors())

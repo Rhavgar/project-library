@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AlertRepository extends JpaRepository<Alert, Long>
 {
-    @Query("SELECT DISTINCT(a) FROM Alert a JOIN a.book b WHERE b.Id = :bookId")
+    @Query("SELECT DISTINCT(a) FROM Alert a JOIN a.book b WHERE b.id = :bookId")
     public List<Alert> findByAlertByBook(@Param("bookId") Long bookId);
     
     public List<Alert> findByLibMemberId(Long libMemberId, Pageable page);

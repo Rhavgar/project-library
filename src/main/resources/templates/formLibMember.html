@@ -16,7 +16,7 @@
             
             <div th:replace="~{frags :: msgs}"></div>
             
-            <form th:object="${libMember}" th:action="@{~/libmembers/libmember/{id}(id=${libMember.id})}" method="post" class="card-body">
+            <form th:object="${libmember}" th:action="@{~/libmembers/libmember/{id}(id=${libmember.id})}" method="post" class="card-body">
                 <input type="hidden" th:field="*{id}"/>
                 
                 <div class="form-row">
@@ -47,14 +47,14 @@
                     </div>
                 </div>
                 
-                <!--<div class="form-row">
+                <div class="form-row">
                     <div class="form-group col">
                         <label for="birthday">Data de Nascimento:</label>
-                        <input th:field="*{birthday}" type="text" class="form-control" placeholder="Data de Nascimento" required="required"/>
+                        <input th:field="*{birthday}" type="date" class="form-control" placeholder="Data de Nascimento" required="required"/>
                     </div>
-                </div>-->
+                </div>
                 
-                <div class="form-row" th:if="${libMember.id==null}">
+                <div class="form-row" th:if="${libmember.id==null}">
                     <div class="form-group col-md-6">
                         <label for="password">Senha:</label>
                         <input th:field="*{password}" type="password" class="form-control" minlength="8" maxlength="16" required="required"/>

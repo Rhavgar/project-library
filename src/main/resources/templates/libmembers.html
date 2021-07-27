@@ -19,18 +19,17 @@
                     <h5 class="card-title" th:text="'Nome: ' + ${libmember.personName}"></h5>
                 </div>
                 <div class="card-body">
-                    <div class="card-text" th:text="'Email: ' + ${libMember.email}"></div>
-                    <div class="card-text" th:text="'CPF: ' + ${libMember.cpf}"></div>
-                    <div class="card-text" th:text="'Endereço: ' + ${libMember.address}"></div>
-                    <div class="card-text" th:text="'Data de Nascimento: ' + ${libMember.birthday}"></div>
+                    <div class="card-text" th:text="'Email: ' + ${libmember.email}"></div>
+                    <div class="card-text" th:text="'CPF: ' + ${libmember.cpf}"></div>
+                    <div class="card-text" th:text="'Endereço: ' + ${libmember.address}"></div>
+                    <div class="card-text" th:text="'Data de Nascimento: ' + ${libmember.birthday.get(5)+'/'+(libmember.birthday.get(2)+1)+'/'+libmember.birthday.get(1)}"></div>
                 </div>
-            </div>
-            
-            <div class="card-body">
-                <a th:href="@{'~/libmembers/libmember/'+${libMember.id}}" class="btn btn-warning">Editar</a>
-                <a th:href="@{'~/libmembers/'+${libMember.id}+'/delete'}" class="btn btn-danger" onclick="return confirm('Deseja realmente excluir esse membro?')">Excluir</a>
-            </div>
-            
+                
+                <div class="card-body">
+                    <a th:href="@{'~/libmembers/libmember/'+${libmember.id}}" class="btn btn-warning">Editar</a>
+                    <a th:href="@{'~/libmembers/'+${libmember.id}+'/delete'}" class="btn btn-danger" onclick="return confirm('Deseja realmente excluir esse membro?')">Excluir</a>
+                </div>
+            </div>            
         </div>
         
         <div th:replace="~{frags :: imports-js}"/>

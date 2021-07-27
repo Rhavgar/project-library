@@ -35,8 +35,9 @@
                 </div>
                 
                 <div class="form-row">
+                    <label>Idioma:</label>
                     <select class="form-control form-control-sm" th:field="*{lang}" required="required">
-                        <option th:each="*{lang}" th:value="*{lang}" th:text="*{lang}">option</option>
+                        <option th:each="l : ${languages}" th:value="${l}" th:text="${l}">content</option>
                     </select>
                 </div>
                 
