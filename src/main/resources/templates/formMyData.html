@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{frags :: imports-css(title='Meus Dados')}">
+        <title>title</title>
+    </head>
+    <body>
+        <div th:replace="~{frags :: menubar(page='mydata')}"/>
+            
+        <div class="container" style="width: 60%; margin-top: 20px">
+             <div class="card-header">
+                <h4>
+                    Meus Dados
+                    <a class="btn btn-primary float-right" th:href="@{~/}" role="button">Voltar</a>
+                </h4>
+            </div>
+            
+            <div th:replace="~{frags :: msgs}"></div>
+            
+            <form th:object="${librarian}" th:action="@{~/librarians/mydata}" method="post" class="card-body">
+                <input type="hidden" th:field="*{id}"/>
+                
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="personName">Nome:</label>
+                        <input th:field="*{personName}" type="text" class="form-control" placeholder="Nome" required="required" maxlength="30"/>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="email">Email:</label>
+                        <input th:field="*{email}" type="text" class="form-control" placeholder="Email" required="required" maxlength="30" readonly="readonly"/>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="cpf">CPF:</label>
+                        <input th:field="*{cpf}" pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}.[0-9]{2}" type="text" class="form-control" placeholder="CPF" required="required" maxlength="14" readonly="readonly"/>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="address">Turno:</label>
+                        <input th:field="*{shift}" type="text" class="form-control" placeholder="Turno" required="required" maxlength="7"/>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <small class="form-text" style="color: #ff6666">* Deixe os campos vazios caso não queira trocar sua senha.</small>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="currentPwd">Senha Atual:</label>
+                        <input th:name="currentPwd" type="password" class="form-control" minlength="8" maxlength="16"/>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="newPwd">Nova Senha:</label>
+                        <input name="newPwd" type="password" class="form-control" minlength="8" maxlength="16"/>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="confirmPwd">Confirmar Senha:</label>
+                        <input name="confirmPwd" type="password" class="form-control" minlength="8" maxlength="16"/>
+                    </div>
+                </div>
+                
+                <div class="card-footer">
+                    <input type="submit" class="btn btn-success" value="Salvar"/>
+                </div>
+                
+            </form>
+            
+        </div>
+        
+        <div th:replace="~{frags :: imports-js}"/>
+    </body>
+</html>
