@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    
     <head th:fragment="imports-css(title)">
         <title th:text="${title}">Projeto Livraria</title>
         <meta charset="UTF-8"/>
@@ -20,15 +23,28 @@
                     <div class="collapse navbar-collapse" id="textNavbar">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item" th:classappend="${page == 'books' ? 'active' : ''}">
-                                <a class="nav-link" th:href="@{~/books}">Livros</a>                          
+                                <a class="nav-link" th:href="@{~/books}">Livros</a>
                             </li>
+                            
+                            <li class="nav-item" th:classappend="${page == 'alerts' ? 'active' : ''}">
+                                <a class="nav-link" th:href="@{~/alerts}">Alertas</a>                   
+                            </li>
+                            
                             <li class="nav-item" th:classappend="${page == 'libmembers' ? 'active' : ''}">
-                                <a class="nav-link" th:href="@{~/libmembers}">Membros</a>                         
+                                <a class="nav-link" th:href="@{~/libmembers}">Membros</a>
                             </li>
-                            <li class="nav-item" th:classappend="${page == 'librarians' ? 'active' : ''}">
-                                <a class="nav-link" th:href="@{~/librarians}">Bibliotecários</a>                          
+                            
+                            <li class="nav-item" th:classappend="${page == 'librarians' ? 'active' : ''}" sec:authorize="hasRole('ROLE_ADMIN')">
+                                <a class="nav-link" th:href="@{~/librarians}">Bibliotecários</a> 
                             </li>
+                            
+                            <li class="nav-item" th:classappend="${page == 'mydata' ? 'active' : ''}">
+                                <a class="nav-link" th:href="@{~/librarians/mydata}">Meus Dados</a>
+                            </li>                      
                         </ul>
+                        
+                        <a sec:authorize="isAuthenticated()" class="btn btn-outline-danger" style="float: right" th:ref="@{~/logout}" role="button">Sair</a>
+                        
                     </div>
                 </nav>
             </div>

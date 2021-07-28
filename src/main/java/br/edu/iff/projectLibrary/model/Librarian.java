@@ -24,5 +24,5 @@ public class Librarian extends Person
     {
         this.shift = shift;
     }
-    
+
 }

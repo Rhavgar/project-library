@@ -1,7 +1,9 @@
 package br.edu.iff.projectLibrary.controller.apirest;
 
 import br.edu.iff.projectLibrary.model.LibMember;
+import br.edu.iff.projectLibrary.model.Permission;
 import br.edu.iff.projectLibrary.service.LibMemberService;
+import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,7 +42,12 @@ public class LibMemberController
     @PostMapping
     public ResponseEntity save(@Valid @RequestBody LibMember libMember)
     {
+        Permission p = new Permission();
+        p.setName("LIBMB");
+        libMember.setPermissions(List.of(p));
+        
         libMember.setId(null);
+        
         service.save(libMember);
         return ResponseEntity.status(HttpStatus.CREATED).body(libMember);
     }

@@ -2,15 +2,20 @@ package br.edu.iff.projectLibrary.model;
 
 import br.edu.iff.projectLibrary.annotation.EmailValidation;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -43,6 +48,10 @@ public abstract class Person implements Serializable
     @NotBlank(message = "Senha é obrigatória.")
     @Length(max = 16, min = 8, message = "Senha deve ter no mínimo 8 caracteres e no máximo 16 caracteres.")
     private String password;
+    
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Size(min = 1, message = "Esse cadastro deve ter no mínimo uma permissão.")
+    private List<Permission> permissions = new ArrayList<>();
 
     public Long getId() 
     {
@@ -93,6 +102,18 @@ public abstract class Person implements Serializable
     {
         this.password = password;
     }
+
+    public List<Permission> getPermissions()
+    {
+        return permissions;
+    }
+
+    public void setPermissions(List<Permission> permissions)
+    {
+        this.permissions = permissions;
+    }
+    
+    
 
     @Override
     public int hashCode() 

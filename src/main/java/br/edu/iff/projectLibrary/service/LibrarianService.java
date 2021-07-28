@@ -2,6 +2,7 @@ package br.edu.iff.projectLibrary.service;
 
 import br.edu.iff.projectLibrary.exception.NotFoundException;
 import br.edu.iff.projectLibrary.model.Librarian;
+import br.edu.iff.projectLibrary.model.Permission;
 import br.edu.iff.projectLibrary.model.Person;
 import br.edu.iff.projectLibrary.repository.LibrarianRepository;
 import java.util.List;
@@ -10,6 +11,7 @@ import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,6 +31,11 @@ public class LibrarianService
         return repo.findAll();
     }
     
+    public Librarian findByEmail(String email)
+    {
+        return repo.findByEmail(email);
+    }
+    
     public Librarian findById(Long id)
     {
         Optional<Librarian> result = repo.findById(id);
@@ -42,9 +49,11 @@ public class LibrarianService
     public Librarian save(Librarian l)
     {
         verifyCpfOrEmail(l.getCpf(), l.getEmail());
+        nullPermissionRemoval(l);
         
         try
         {
+            l.setPassword(new BCryptPasswordEncoder().encode(l.getPassword()));
             return repo.save(l);
         }
         catch(Exception e)
@@ -57,6 +66,7 @@ public class LibrarianService
     {
         Librarian obj = findById(l.getId());
         alterPwd(obj, currentPwd, newPwd, confirmPwd);
+        nullPermissionRemoval(l);
         
         try
         {
@@ -103,9 +113,11 @@ public class LibrarianService
     
     private void alterPwd(Librarian obj, String currentPwd, String newPwd, String confirmPwd)
     {
+        BCryptPasswordEncoder crypt = new BCryptPasswordEncoder();
+        
         if(!currentPwd.isBlank() && !newPwd.isBlank() && !confirmPwd.isBlank())
         {
-            if(!currentPwd.equals(obj.getPassword()))
+            if(!crypt.matches(currentPwd, obj.getPassword()))
             {
                 throw new RuntimeException("Senha atual está incorreta.");
             }
@@ -113,7 +125,17 @@ public class LibrarianService
             {
                 throw new RuntimeException("Nova senha e Confirmar senha não conferem.");
             }
-            obj.setPassword(newPwd);
+            obj.setPassword(new BCryptPasswordEncoder().encode(newPwd));
+        }
+    }
+    
+    public void nullPermissionRemoval(Librarian l)
+    {
+        l.getPermissions().removeIf((Permission p) -> {return p.getId() == null;});
+        
+        if(l.getPermissions().isEmpty())
+        {
+            throw new RuntimeException("Bibliotecário deve conter no mínimo uma permissão.");
         }
     }
 }

@@ -26,7 +26,6 @@
                 </div>
                 
                 <div class="card-body">
-                    <!-- <a th:href="@{~/alerts(book=${book.id})}" class="btn btn-success">Alertas</a> -->
                     <a th:href="@{'~/books/book/'+${book.id}}" class="btn btn-warning">Editar</a>
                     <a th:href="@{'~/books/'+${book.id}+'/delete'}" class="btn btn-danger" onclick="return confirm('Deseja realmente excluir esse livro?')">Excluir</a>
                 </div>
