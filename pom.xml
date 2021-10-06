@@ -11,9 +11,9 @@
     </parent>
     
     <groupId>br.edu.iff</groupId>
-    <artifactId>projectLibrary</artifactId>
+    <artifactId>project-library</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>projectLibrary</name>
+    <name>project-library</name>
     <description>A library project for learning purposes</description>
     
     <properties>
